@@ -1,0 +1,28 @@
+{
+  "name": "gen-npm",
+  "version": "0.0.0",
+  "description": "Generate a node package to be published to npm",
+  "author": "Adam Hull <adam@hmlad.com>",
+  "keywords": [
+    "generator npm package metalsmith"
+  ],
+  "bin": {
+    "gen-npm": "./gen_npm.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hurrymaplelad/gen-npm.git"
+  },
+  "homepage": "https://github.com/hurrymaplelad/gen-npm",
+  "bugs": "https://github.com/hurrymaplelad/gen-npm/issues",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jshint": "*",
+    "mocha": "^3.1.0"
+  },
+  "scripts": {
+    "test": "jshint *.js && mocha"
+  }
+}
