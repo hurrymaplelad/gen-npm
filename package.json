@@ -16,6 +16,7 @@
   "homepage": "https://github.com/hurrymaplelad/gen-npm",
   "bugs": "https://github.com/hurrymaplelad/gen-npm/issues",
   "license": "MIT",
+  "private": true,
   "dependencies": {
   },
   "devDependencies": {
