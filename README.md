@@ -24,6 +24,17 @@ Then you can start a new node module with:
 $ mkdir foo && cd foo && gen-npm
 ```
 
+Running Tests
+-------------
+You'll need [BATS](https://github.com/sstephenson/bats):
+```
+$ brew install bats
+```
+Then the usual
+```
+$ npm test
+```
+
 
 Prior Art
 ----------

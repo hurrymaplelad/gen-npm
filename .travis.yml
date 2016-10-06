@@ -1,3 +1,7 @@
 language: node_js
+before_install:
+  - sudo add-apt-repository ppa:duggan/bats --yes
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq bats
 node_js:
   - 'node'
