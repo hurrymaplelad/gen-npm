@@ -6,5 +6,5 @@ setup() {
 }
 
 @test "creates a package.json" {
-  [ -e temp/package.json ]
+  [ -e package.json ]
 }
