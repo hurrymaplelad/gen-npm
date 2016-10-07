@@ -23,7 +23,7 @@ function discoverAuthor() {
 // Optional directory name as first arg
 let repoSlug = process.argv[2];
 if(repoSlug) {
-  fs.mkdir(repoSlug);
+  fs.mkdirSync(repoSlug);
   process.chdir(repoSlug);
 } else {
   // use current directory name

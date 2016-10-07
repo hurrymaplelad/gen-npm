@@ -16,3 +16,8 @@ usePromptDefaults='
   expect -c "spawn gen-npm $usePromptDefaults"
   [ -e package.json ]
 }
+
+@test "given a name it creates that directory and generates files inside" {
+  expect -c "spawn gen-npm foo $usePromptDefaults"
+  [ -e foo/package.json ]
+}
