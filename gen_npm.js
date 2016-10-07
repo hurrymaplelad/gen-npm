@@ -4,6 +4,10 @@ const path = require('path');
 const {dasherize} = require('underscore.string');
 const prompt = require('inquirer').createPromptModule();
 
+const DATA = {
+  githubUser: 'hurrymaplelad'
+};
+
 // Gather user name and email
 function discoverAuthor() {
   return new Promise((resolve, reject) => {
@@ -18,6 +22,23 @@ function discoverAuthor() {
       resolve(user);
     });
   });
+}
+
+function renderJSON(destPath, obj) {
+  fs.writeFileSync(
+    destPath,
+    JSON.stringify(obj, null, 2)
+  );
+}
+
+function renderHandlebars(destPath, templatePath, data) {
+  const Handlebars = require('handlebars');
+  fs.writeFileSync(
+    destPath,
+    Handlebars.compile(
+      fs.readFileSync(`${__dirname}/${templatePath}`, 'utf8')
+    )(data)
+  );
 }
 
 // Optional directory name as first arg
@@ -56,14 +77,16 @@ discoverAuthor()
       }
     }
   ]).then((data) => {
+    Object.assign(data, DATA);
     data.repoSlug = repoSlug;
     data.author = author;
     return data;
   });
 }).then((data) => {
-    // package.json
-    const packageJsonTemplate = require('./templates/package_json');
-    fs.writeFile('package.json', packageJsonTemplate(data));
+
+    renderJSON('package.json', require('./templates/package_json')(data));
+    renderHandlebars('README.md', './templates/_README.md', data);
+
 }).catch((err) => {
   console.error(err);
   process.exit(1);

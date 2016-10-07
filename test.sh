@@ -12,9 +12,10 @@ usePromptDefaults='
   expect timeout {send_user "\ntimed out"; exit 1} eof
 '
 
-@test "creates a package.json" {
+@test "creates lots of useful files" {
   expect -c "spawn gen-npm $usePromptDefaults"
   [ -e package.json ]
+  [ -e README.md ]
 }
 
 @test "given a name it creates that directory and generates files inside" {
