@@ -22,3 +22,11 @@ usePromptDefaults='
   expect -c "spawn gen-npm foo $usePromptDefaults"
   [ -e foo/package.json ]
 }
+
+@test "generates a failing test" {
+  expect -c "spawn gen-npm
+    set timeout 60
+    $usePromptDefaults"
+  npm install
+  ./node_modules/.bin/mocha | grep "busted"
+}

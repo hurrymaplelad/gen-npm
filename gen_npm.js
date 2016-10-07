@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const {dasherize} = require('underscore.string');
+const underscoreString = require('underscore.string');
+const {dasherize, underscored} = underscoreString;
 const shell = require('shelljs');
 const prompt = require('inquirer').createPromptModule();
+const Handlebars = require('handlebars');
+
+for(let helper of ['camelize']) {
+  Handlebars.registerHelper(helper, underscoreString[helper]);
+}
 
 const DATA = {
   githubUser: 'hurrymaplelad'
@@ -90,6 +96,9 @@ discoverAuthor()
     shell.cp(`${__dirname}/templates/npmignore`, '.npmignore');
     shell.cp(`${__dirname}/templates/travis.yml`, '.travis.yml');
     shell.cp(`${__dirname}/.editorconfig`, '.editorconfig');
+    shell.touch(`${underscored(data.pkgName)}.js`);
+    shell.mkdir('test');
+    renderHandlebars(`${__dirname}/templates/test.js`, data, 'test/test.js');
 }).catch((err) => {
   console.error(err);
   process.exit(1);
