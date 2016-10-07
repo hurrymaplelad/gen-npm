@@ -16,6 +16,7 @@ usePromptDefaults='
   expect -c "spawn gen-npm $usePromptDefaults"
   [ -e package.json ]
   [ -e README.md ]
+  [ -e .git/HEAD ]
 }
 
 @test "given a name it creates that directory and generates files inside" {

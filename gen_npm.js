@@ -99,6 +99,7 @@ discoverAuthor()
     shell.touch(`${underscored(data.pkgName)}.js`);
     shell.mkdir('test');
     renderHandlebars(`${__dirname}/templates/test.js`, data, 'test/test.js');
+    shell.exec('git init');
 }).catch((err) => {
   console.error(err);
   process.exit(1);
