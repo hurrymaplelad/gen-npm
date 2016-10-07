@@ -1,4 +1,4 @@
-{{camelize pkgName}} = require('..');
+const {{camelize pkgName}} = require('..');
 
 describe('{{pkgName}}', function() {
   it('works', function() {
