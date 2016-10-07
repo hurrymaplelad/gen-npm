@@ -18,11 +18,18 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "bluebird": "^3.4.6",
+    "git-config": "0.0.7",
+    "inquirer": "^1.2.1",
+    "underscore.string": "^3.3.4"
   },
   "devDependencies": {
     "jshint": "*"
   },
   "scripts": {
     "test": "jshint *.js && bats test.sh"
+  },
+  "jshintConfig": {
+    "esversion": 6
   }
 }
