@@ -28,6 +28,9 @@ function base(data) {
     },
     scripts: {
       "test": "jshint *.js && mocha"
+    },
+    jshintConfig: {
+      "esversion": 6
     }
   };
 }
