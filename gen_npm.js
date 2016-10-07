@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const {dasherize} = require('underscore.string');
+const shell = require('shelljs');
 const prompt = require('inquirer').createPromptModule();
 
 const DATA = {
@@ -24,19 +25,19 @@ function discoverAuthor() {
   });
 }
 
-function renderJSON(destPath, obj) {
+function renderJSON(obj, destPath) {
   fs.writeFileSync(
     destPath,
     JSON.stringify(obj, null, 2)
   );
 }
 
-function renderHandlebars(destPath, templatePath, data) {
+function renderHandlebars(templatePath, data, destPath) {
   const Handlebars = require('handlebars');
   fs.writeFileSync(
     destPath,
     Handlebars.compile(
-      fs.readFileSync(`${__dirname}/${templatePath}`, 'utf8')
+      fs.readFileSync(templatePath, 'utf8')
     )(data)
   );
 }
@@ -83,10 +84,12 @@ discoverAuthor()
     return data;
   });
 }).then((data) => {
-
-    renderJSON('package.json', require('./templates/package_json')(data));
-    renderHandlebars('README.md', './templates/_README.md', data);
-
+    renderJSON(require('./templates/package_json')(data), 'package.json');
+    renderHandlebars(`${__dirname}/templates/_README.md`, data, 'README.md');
+    shell.cp(`${__dirname}/templates/gitignore`, '.gitignore');
+    shell.cp(`${__dirname}/templates/npmignore`, '.npmignore');
+    shell.cp(`${__dirname}/templates/travis.yml`, '.travis.yml');
+    shell.cp(`${__dirname}/.editorconfig`, '.editorconfig');
 }).catch((err) => {
   console.error(err);
   process.exit(1);
